@@ -12,9 +12,8 @@ staticfiles/
 
 # uv / Python environments
 .venv
-venv/
-.env/
-ENV/
+.env
+
 
 # uv cache
 .cache/
