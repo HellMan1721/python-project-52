@@ -1,0 +1,50 @@
+# Byte-compiled / optimized files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django
+*.log
+local.sqlite3
+db.sqlite3
+media/
+staticfiles/
+
+# uv / Python environments
+.venv
+venv/
+.env/
+ENV/
+
+# uv cache
+.cache/
+
+
+# IDE / Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Testing / Coverage
+htmlcov/
+.coverage
+.coverage.*
+.pytest_cache/
+.tox/
+coverage.xml
+*.cover
+
+# Render build
+.python-version
