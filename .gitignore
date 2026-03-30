@@ -44,6 +44,3 @@ htmlcov/
 .tox/
 coverage.xml
 *.cover
-
-# Render build
-.python-version
