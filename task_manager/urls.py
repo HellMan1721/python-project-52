@@ -15,14 +15,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.http import HttpResponse
-from django.urls import path
+from django.urls import path, include
+from . import views
+from .views import IndexView
 
-
-def index(request):
-    return HttpResponse("Hello, Hexlet!")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index),
+    path('', IndexView.as_view(), name='index'),
+    path('login/', views.BaseLoginView.as_view(), name='login'),
+    path('logout/', views.logout_view, name='logout'),
+    path('users/', include('task_manager.users.urls')),
+    path('statuses/', include('task_manager.statuses.urls')),
+    path('tasks/', include('tasks.urls')),
+    path('labels/', include('task_manager.labels.urls'))
 ]
