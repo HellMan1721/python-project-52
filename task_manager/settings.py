@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 import dj_database_url
+import rollbar
 
 
 load_dotenv()
@@ -29,14 +30,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-7cpqef34^0qnq6@k)hlt6d0c%8nebbnps&+&=5!1#2=c*ru)hc'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = ['webserver', 'localhost', '127.0.0.1', '0.0.0.0']
-
 
 # Application definition
 
 INSTALLED_APPS = [
+    'rollbar.contrib.django',
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,17 +47,29 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'task_manager',
     'tasks',
+    'django_filters'
 ]
 
+rollbar.init(
+    access_token=os.getenv('ROLLBAR_ACCESS_TOKEN'),
+    environment=os.getenv('ROLLBAR_ENVIRONMENT', 'development'),
+    root=str(BASE_DIR),
+    branch='main',
+    handler='synchronous'
+)
+
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
+    'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
+
+
 
 ROOT_URLCONF = 'task_manager.urls'
 
@@ -81,10 +95,7 @@ WSGI_APPLICATION = 'task_manager.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL'),
-        conn_health_checks=True,
-    )
+    'default': dj_database_url.parse(os.getenv('DATABASE_URL'))
 }
 
 
@@ -137,3 +148,12 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+rollbar.report_message('Rollbar is configured correctly', 'info')
+
+# Trigger a test exception
+try:
+    a = None
+    a.hello()  # This will raise AttributeError
+except:
+    rollbar.report_exc_info()

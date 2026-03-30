@@ -9,5 +9,5 @@ class StatusTestCase(TestCase):
 
     def test_status_create(self):
         self.client.login(username='test', password='test')
-        self.client.post(reverse('statuses:status_create'), {'name': 'Новый'})
+        self.client.post(reverse('statuses:create'), {'name': 'Новый'})
         self.assertEqual(Status.objects.count(), 1)

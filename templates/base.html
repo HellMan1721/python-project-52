@@ -33,7 +33,7 @@
                     <a class="nav-link" href="{% url 'logout' %}">{% trans "Выход" %}</a>
                 {% else %}
                     <a class="nav-link" href="{% url 'login' %}">{% trans "Вход" %}</a>
-                    <a class="nav-link" href="{% url 'users:user_create' %}">{% trans "Регистрация" %}</a>
+                    <a class="nav-link" href="{% url 'users:create' %}">{% trans "Регистрация" %}</a>
                 {% endif %}
             </div>
         </div>

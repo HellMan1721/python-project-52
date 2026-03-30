@@ -28,7 +28,7 @@
                                 {% endblocktrans %}
                             </p>
                         </div>
-                        <a href="{% url 'labels:labels' %}" class="btn btn-secondary">
+                        <a href="{% url 'labels:list' %}" class="btn btn-secondary">
                             <i class="bi bi-arrow-left"></i> {% trans "Вернуться" %}
                         </a>
                     {% else %}
@@ -48,7 +48,7 @@
                             </button>
 
                         </form>
-                        <a href="{% url 'labels:labels' %}" class="btn btn-secondary btn-lg ms-3">
+                        <a href="{% url 'labels:list' %}" class="btn btn-secondary btn-lg ms-3">
                             {% trans "Отмена" %}
                         </a>
                     {% endif %}

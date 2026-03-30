@@ -28,5 +28,6 @@ urlpatterns = [
     path('users/', include('task_manager.users.urls')),
     path('statuses/', include('task_manager.statuses.urls')),
     path('tasks/', include('tasks.urls')),
-    path('labels/', include('task_manager.labels.urls'))
+    path('labels/', include('task_manager.labels.urls')),
+    path('rollbar-test/', views.test_rollbar, name='rollbar_test'),
 ]

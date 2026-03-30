@@ -45,7 +45,7 @@ class TaskViewsTest(TestCase):
             'status': self.status.pk,
             'executor': self.user.pk,
         }
-        response = self.client.post(reverse('tasks:task_create'), data)
+        response = self.client.post(reverse('tasks:create'), data)
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('tasks:tasks'))
         self.assertTrue(Task.objects.filter(name='Новая задача').exists())
@@ -60,7 +60,7 @@ class TaskViewsTest(TestCase):
             'executor': self.user.pk,
         }
         response = self.client.post(
-            reverse('tasks:task_update', kwargs={'pk': self.task.pk}),
+            reverse('tasks:update', kwargs={'pk': self.task.pk}),
             data
         )
         self.assertEqual(response.status_code, 302)
@@ -77,7 +77,7 @@ class TaskViewsTest(TestCase):
             'executor': self.user.pk,
         }
         response = self.client.post(
-            reverse('tasks:task_update', kwargs={'pk': self.task.pk}),
+            reverse('tasks:update', kwargs={'pk': self.task.pk}),
             data,
             follow=True
         )
@@ -98,7 +98,7 @@ class TaskViewsTest(TestCase):
             executor=self.user
         )
         response = self.client.post(
-            reverse('tasks:task_delete', kwargs={'pk': task.pk})
+            reverse('tasks:delete', kwargs={'pk': task.pk})
         )
         self.assertEqual(response.status_code, 302)
         self.assertFalse(Task.objects.filter(name='Удаляемая задача').exists())
@@ -112,7 +112,7 @@ class TaskViewsTest(TestCase):
         print("Logged in as:", self.client.session['_auth_user_id'])
         
         response = self.client.post(
-            reverse('tasks:task_delete', kwargs={'pk': self.task.pk}),
+            reverse('tasks:delete', kwargs={'pk': self.task.pk}),
             follow=True
         )
         
