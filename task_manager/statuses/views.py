@@ -25,31 +25,23 @@ class StatusUpdateView(LoginRequiredMixin, UpdateView):
     model = Status
     fields = ['name']
     template_name = 'statuses/update.html'
-    success_url = reverse_lazy('statuses:statuses')
 
-    def get(self, request, *args, **kwargs):
-        status = self.get_object()
+    def dispatch(self, request, *args, **kwargs):
         if not request.user.is_superuser:
+            status = self.get_object()
             messages.error(
                 request,
                 f'Статус «{status.name}» может редактировать только администратор'
             )
             return redirect('statuses:statuses')
+        return super().dispatch(request, *args, **kwargs)
 
-        return super().get(request, *args, **kwargs)
+    def get_success_url(self):
+        return self.request.path
 
-    def post(self, request, *args, **kwargs):
-        status = self.get_object()
-
-        if not request.user.is_superuser:
-            messages.error(
-                request,
-                f'Статус «{status.name}» может редактировать только администратор'
-            )
-            return redirect('statuses:statuses')
-
-        messages.success(request, 'Статус успешно изменён')
-        return super().post(request, *args, **kwargs)
+    def form_valid(self, form):
+        messages.success(self.request, 'Статус успешно изменён')
+        return super().form_valid(form)
 
 class StatusDeleteView(LoginRequiredMixin, DeleteView):
     model = Status
