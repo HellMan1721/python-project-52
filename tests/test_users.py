@@ -21,6 +21,7 @@ class UserTests(TestCase):
             'first_name': 'New',
             'last_name': 'User', 
             'username': 'newuser',
-            'password': 'password123'
+            'password1': 'VeryStrongPassword123!',
+            'password2': 'VeryStrongPassword123!'
         })
         self.assertEqual(User.objects.count(), 2)

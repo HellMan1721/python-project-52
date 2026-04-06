@@ -1,10 +1,13 @@
 from django.contrib import messages
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.shortcuts import render, redirect
+from django.views import View
+from django.views.generic import ListView, UpdateView, DeleteView
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied 
+from .forms import CustomUserCreationForm
 
 
 
@@ -13,19 +16,22 @@ class UserListView(ListView):
     template_name = 'users/list.html'
     context_object_name = 'users'
 
-class UserCreateView(CreateView):
-    model = User
-    fields = ['username', 'password']
-    template_name = 'users/create.html'
-    success_url = reverse_lazy('users:users')
+class UserCreateView(View):
+    def get(self, request):
+        form = CustomUserCreationForm()
+        return render(request, 'users/create.html', {'form': form})
 
-    def form_valid(self, form):
-        user = form.save()
-        user.set_password(form.cleaned_data['password'])
-        user.save()
-        login(self.request, user)
-        messages.success(self.request, 'Пользователь успешно зарегистрирован')
-        return super().form_valid(form)
+    def post(self, request):
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            messages.success(request, 'Пользователь успешно зарегистрирован')
+            return redirect('/login/')
+        else:
+            messages.error(request, 'Не удалось создать пользователя')
+            print(form.errors)
+        return render(request, 'users/create.html', {'form': form})
+ 
     
 class UserUpdateView(LoginRequiredMixin, UpdateView):
     model = User
