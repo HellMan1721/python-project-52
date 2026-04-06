@@ -49,4 +49,5 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
 class UserDeleteView(LoginRequiredMixin, DeleteView):
     model = User
     template_name = 'users/delete.html'
+    messages.success(self.request, 'Пользователь успешно удален')
     success_url = reverse_lazy('users:users')

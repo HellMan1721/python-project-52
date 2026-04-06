@@ -6,6 +6,11 @@ from task_manager.models import Status, Label
 
 
 class TaskForm(forms.ModelForm):
+    executor = forms.ModelChoiceField(
+        queryset=User.objects.all(),
+        label="Исполнитель"
+    )
+    
     class Meta:
         model = Task
         fields = ['name', 'description', 'status', 'executor', 'labels']

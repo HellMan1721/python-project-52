@@ -32,12 +32,8 @@
                     {{ form.executor }}
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">{% trans "Метки" %}</label>
-                    <select name="labels" multiple class="form-control" size="6">
-                        {% for label in form.labels.field.queryset %}
-                            <option value="{{ label.pk }}">{{ label.name }}</option>
-                        {% endfor %}
-                    </select>
+                    <label for="id_labels">{% trans "Метки" %}</label>
+                    {{ form.labels }}
                     <small class="form-text text-muted">
                         {% trans "Зажмите Ctrl (Cmd) для выбора нескольких меток" %}
                     </small>
