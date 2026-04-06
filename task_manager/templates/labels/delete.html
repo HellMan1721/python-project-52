@@ -42,8 +42,7 @@
 
                         <form method="post" class="d-inline">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-danger btn-lg" 
-                                onclick="return confirm('{% trans "Вы уверены?" %}')">
+                            <button type="submit" class="btn btn-danger btn-lg" ">
                                 <i class="bi bi-trash"></i> {% trans "Да, удалить" %}
                             </button>
 

@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied 
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, CustomUserUpdateForm
 
 
 
@@ -32,7 +32,7 @@ class UserCreateView(View):
     
 class UserUpdateView(LoginRequiredMixin, UpdateView):
     model = User
-    fields = ['first_name', 'last_name', 'username']
+    form_class = CustomUserUpdateForm
     template_name = 'users/update.html'
     success_url = reverse_lazy('users:users')
  

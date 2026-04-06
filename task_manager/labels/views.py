@@ -39,9 +39,12 @@ class LabelDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'labels/delete.html'
     success_url = reverse_lazy('labels:list')
 
-    def form_valid(self, form):
+    def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
+
         if self.object.tasks.exists():
-            messages.error(self.request, 'Невозможно удалить метку')  # self.request!
+            messages.error(request, 'Невозможно удалить метку')
             return redirect('labels:list')
-        return super().form_valid(form)
+
+        messages.success(request, 'Метка успешно удалена')
+        return super().delete(request, *args, **kwargs)

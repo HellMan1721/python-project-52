@@ -26,18 +26,8 @@ class StatusUpdateView(LoginRequiredMixin, UpdateView):
     fields = ['name']
     template_name = 'statuses/update.html'
 
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_superuser:
-            status = self.get_object()
-            messages.error(
-                request,
-                f'Статус «{status.name}» может редактировать только администратор'
-            )
-            return redirect('statuses:statuses')
-        return super().dispatch(request, *args, **kwargs)
-
     def get_success_url(self):
-        return self.request.path
+        return reverse_lazy('statuses:statuses')
 
     def form_valid(self, form):
         messages.success(self.request, 'Статус успешно изменён')
