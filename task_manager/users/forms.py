@@ -16,3 +16,8 @@ class CustomUserCreationForm(UserCreationForm):
             'password1': 'Пароль',
             'password2': 'Подтверждение пароля'
         }
+        help_texts = {
+            'username': '',
+            'password1': '',
+            'password2': '',
+        }
