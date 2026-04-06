@@ -3,15 +3,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 class CustomUserCreationForm(UserCreationForm):
-    first_name = forms.CharField(max_length=30, required=True, label='Имя')
-    last_name = forms.CharField(max_length=30, required=True, label='Фамилия')
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields.values():
-            field.label_suffix = ""
-
-
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'username', 'password1', 'password2')
@@ -20,12 +11,13 @@ class CustomUserCreationForm(UserCreationForm):
             'last_name': 'Фамилия',
             'username': 'Имя пользователя',
             'password1': 'Пароль',
-            'password2': 'Подтверждение пароля'
+            'password2': 'Подтверждение пароля',
         }
-        help_texts = {
-            'first_name': '',
-            'last_name': '',
-            'username': '',
-            'password1': '',
-            'password2': '',
-        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, label in self.Meta.labels.items():
+            self.fields[field_name].label = label
+        # убираем двоеточие
+        for field in self.fields.values():
+            field.label_suffix = ""
