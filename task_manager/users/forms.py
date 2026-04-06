@@ -12,7 +12,7 @@ class CustomUserCreationForm(UserCreationForm):
         labels = {
             'first_name': 'Имя',
             'last_name': 'Фамилия',
-            'username': 'Имя пользователя'
+            'username': 'Имя пользователя',
             'password1': 'Пароль',
             'password2': 'Подтверждение пароля'
         }
