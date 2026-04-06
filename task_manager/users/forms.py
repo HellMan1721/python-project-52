@@ -6,6 +6,12 @@ class CustomUserCreationForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True, label='Имя')
     last_name = forms.CharField(max_length=30, required=True, label='Фамилия')
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.label_suffix = ""
+
+
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'username', 'password1', 'password2')
