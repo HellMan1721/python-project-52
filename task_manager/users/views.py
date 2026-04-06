@@ -27,9 +27,6 @@ class UserCreateView(View):
             user = form.save()
             messages.success(request, 'Пользователь успешно зарегистрирован')
             return redirect('/login/')
-        else:
-            messages.error(request, 'Не удалось создать пользователя')
-            print(form.errors)
         return render(request, 'users/create.html', {'form': form})
  
     
