@@ -9,15 +9,12 @@ class CustomUserCreationForm(UserCreationForm):
     password1 = forms.CharField(label="Пароль", widget=forms.PasswordInput)
     password2 = forms.CharField(label="Подтверждение пароля", widget=forms.PasswordInput)    
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field_name, label in self.Meta.labels.items():
-            self.fields[field_name].label = label
-        # убираем двоеточие
-        for field in self.fields.values():
-            field.label_suffix = ""
-    
+
     class Meta:
         model = User
         fields = ("first_name", "last_name", "username", "password1", "password2")
 
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            for field in self.fields.values():
+                field.label_suffix = ""
