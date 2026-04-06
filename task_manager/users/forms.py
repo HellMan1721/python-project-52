@@ -21,3 +21,8 @@ class CustomUserCreationForm(UserCreationForm):
         # убираем двоеточие
         for field in self.fields.values():
             field.label_suffix = ""
+        
+        self.fields['password1'].validators = []
+        self.fields['password2'].validators = []
+        self.fields['password1'].widget.attrs['minlength'] = 1
+        self.fields['password2'].widget.attrs['minlength'] = 1
