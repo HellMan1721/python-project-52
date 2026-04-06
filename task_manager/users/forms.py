@@ -27,7 +27,3 @@ class CustomUserCreationForm(UserCreationForm):
             raise forms.ValidationError("Пароли не совпадают")
 
         return password2
-
-    def _post_clean(self):
-        """Отключаем стандартную валидацию пароля Django"""
-        pass
