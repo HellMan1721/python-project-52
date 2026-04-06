@@ -24,7 +24,7 @@ class UserCreateView(View):
     def post(self, request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
+            form.save()
             messages.success(request, 'Пользователь успешно зарегистрирован')
             return redirect('/login/')
         return render(request, 'users/create.html', {'form': form})
