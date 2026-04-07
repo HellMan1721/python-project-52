@@ -6,16 +6,20 @@ from task_manager.models import Status, Label
 
 
 class TaskForm(forms.ModelForm):
+    executor = forms.ModelChoiceField(
+        queryset=User.objects.none(),
+        required=False,
+        label='Исполнитель',
+        empty_label='---------'
+    )
+
     class Meta:
         model = Task
         fields = ['name', 'description', 'status', 'executor', 'labels']
 
-    executor = forms.ModelChoiceField(
-        queryset=User.objects.all(),
-        required=False,
-        label='Исполнитель',
-        empty_label=None
-    )
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['executor'].queryset = User.objects.all()
 
 class TaskFilter(django_filters.FilterSet):
     status = django_filters.ModelChoiceFilter(
