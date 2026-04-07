@@ -53,5 +53,5 @@ class UserDeleteView(LoginRequiredMixin, DeleteView):
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
-        messages.success(request, 'Пользователь успешно удален')
+        messages.success(self.request, 'Пользователь успешно удален')
         return super().delete(request, *args, **kwargs)

@@ -38,27 +38,7 @@ class StatusDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'statuses/delete.html'
     success_url = reverse_lazy('statuses:statuses')
 
-    def get(self, request, *args, **kwargs):
-        status = self.get_object()
-
-        if not request.user.is_superuser:
-            messages.error(
-                request,
-                f'Статус «{status.name}» может удалить только администратор'
-            )
-            return redirect('statuses:statuses')
-
-        return super().get(request, *args, **kwargs)
-
     def delete(self, request, *args, **kwargs):
-        status = self.get_object()
-
-        if not request.user.is_superuser:
-            messages.error(
-                request,
-                f'Статус «{status.name}» может удалить только администратор'
-            )
-            return redirect('statuses:statuses')
-
+        self.object = self.get_object()
         messages.success(request, 'Статус успешно удалён')
         return super().delete(request, *args, **kwargs)
