@@ -45,5 +45,5 @@ class StatusDeleteView(LoginRequiredMixin, DeleteView):
             messages.error(request, 'Невозможно удалить статус')
             return redirect('statuses:statuses')
 
-        messages.success(request, 'Статус успешно удален')
-        return super().post(request, *args, **kwargs)
+        messages.success(self.request, 'Статус успешно удален')
+        return super().delete(request, *args, **kwargs)

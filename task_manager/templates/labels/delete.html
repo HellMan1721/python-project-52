@@ -15,23 +15,6 @@
                 </div>
                 <div class="card-body text-center py-5">
 
-                    {% if object.tasks.exists %}
-                        <div class="alert alert-warning">
-                            <h5><i class="bi bi-exclamation-triangle"></i> {% trans "Невозможно удалить метку" %}</h5>
-                            <p class="mb-0">
-                                {% trans "Метка используется в" %} 
-                                <strong>{{ object.tasks.count }}</strong> 
-                                {% blocktrans count counter=object.tasks.count %}
-                                    задаче
-                                {% plural %}
-                                    задачах
-                                {% endblocktrans %}
-                            </p>
-                        </div>
-                        <a href="{% url 'labels:list' %}" class="btn btn-secondary">
-                            <i class="bi bi-arrow-left"></i> {% trans "Вернуться" %}
-                        </a>
-                    {% else %}
                         <div class="alert alert-danger">
                             <h4>{% trans "Вы уверены?" %}</h4>
                             <p class="mb-4">
@@ -42,7 +25,7 @@
 
                         <form method="post" class="d-inline">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-danger btn-lg" ">
+                            <button type="submit" class="btn btn-danger btn-lg">
                                 <i class="bi bi-trash"></i> {% trans "Да, удалить" %}
                             </button>
 
@@ -50,7 +33,6 @@
                         <a href="{% url 'labels:list' %}" class="btn btn-secondary btn-lg ms-3">
                             {% trans "Отмена" %}
                         </a>
-                    {% endif %}
                 </div>
             </div>
         </div>
