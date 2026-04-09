@@ -56,6 +56,5 @@ class UserDeleteView(LoginRequiredMixin, DeleteView):
             messages.error(request, 'Вы не можете удалить другого пользователя')
             return redirect('users:users')
         
-        logout(request)
         messages.success(self.request, 'Пользователь успешно удален')
-        return super().delete(request, *args, **kwargs)
+        return super(UserDeleteView, self).delete(request, *args, **kwargs)
