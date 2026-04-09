@@ -52,6 +52,5 @@ class UserDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('users:users')
 
     def delete(self, request, *args, **kwargs):
-        self.object = self.get_object()
         messages.success(self.request, 'Пользователь успешно удален')
         return super().delete(request, *args, **kwargs)
