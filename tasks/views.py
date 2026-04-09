@@ -70,9 +70,9 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
     def test_func(self):
         return self.get_object().author == self.request.user
 
-    def post(self, request, *args, **kwargs):
+    def delete(self, request, *args, **kwargs):
         messages.success(request, 'Задача успешно удалена')
-        return super().post(request, *args, **kwargs)
+        return super().delete(request, *args, **kwargs)
 
 
 class TaskDetailView(LoginRequiredMixin, DetailView):
