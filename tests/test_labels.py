@@ -5,6 +5,7 @@ from django.urls import reverse
 from task_manager.models import Label, Status
 from tasks.models import Task
 
+
 User = get_user_model()
 
 

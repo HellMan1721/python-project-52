@@ -4,6 +4,7 @@ from django.urls import reverse
 
 from tasks.models import Status, Task
 
+
 User = get_user_model()
 
 
