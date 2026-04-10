@@ -7,7 +7,14 @@ User = get_user_model()
 
 
 class Status(models.Model):
-    name = models.CharField(max_length=150, unique=True, verbose_name=_('Имя'))
+    name = models.CharField(
+        max_length=150,
+        unique=True,
+        verbose_name=_('Имя'),
+        error_messages={
+            'unique': _('Статус уже существует')
+        }
+        )
 
     class Meta:
         verbose_name = _('Статус')
