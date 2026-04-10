@@ -1,11 +1,12 @@
 from django.contrib import messages
-from django.shortcuts import render, redirect
-from django.views import View
-from django.views.generic import ListView, UpdateView, DeleteView
-from django.contrib.auth.models import User
-from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
+from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
+from django.views import View
+from django.views.generic import DeleteView, ListView, UpdateView
+
 from .forms import CustomUserCreationForm, CustomUserUpdateForm
 
 
@@ -59,7 +60,10 @@ class UserDeleteView(LoginRequiredMixin, DeleteView):
             )
             return redirect("users:users")
 
-        if self.object.author_tasks.exists() or self.object.executor_tasks.exists():
+        if (
+            self.object.author_tasks.exists() or
+            self.object.executor_tasks.exists()
+        ):
             messages.error(
                 self.request,
                 "Невозможно удалить пользователя, потому что он используется",

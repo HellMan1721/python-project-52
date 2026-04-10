@@ -44,3 +44,6 @@ htmlcov/
 .tox/
 coverage.xml
 *.cover
+
+# ruff
+.ruff_cache
