@@ -1,6 +1,6 @@
 # Task Manager (Python/Django)
 
-[![SonarCloud Coverage](https://sonarcloud.io/api/project_badges/measure?project=hellman1721_python-project-52&metric=coverage)](https://sonarcloud.io/dashboard?id=hellman1721_python-project-52)
+[![SonarCloud Coverage](https://sonarcloud.io/api/project_badges/measure?project=HellMan1721_python-project-52&metric=coverage)](https://sonarcloud.io/dashboard?id=HellMan1721_python-project-52)
 
 
 Веб-приложение для управления задачами с пользователями, статусами, метками и фильтрами.
