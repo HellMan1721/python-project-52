@@ -60,7 +60,6 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
     model = Task
     template_name = 'tasks/delete.html'
     success_url = reverse_lazy('tasks:tasks')
-<<<<<<< HEAD
 
     def dispatch(self, request, *args, **kwargs):
         self.object = self.get_object()
@@ -79,15 +78,6 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
             self.request, 'Задача успешно удалена'
         )
         return super().form_valid(form)
-=======
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
-    def test_func(self):
-        return self.get_object().author == self.request.user
-
-    def delete(self, request, *args, **kwargs):
-        messages.success(request, 'Задача успешно удалена')
-        return super().delete(request, *args, **kwargs)
->>>>>>> b2720a750f8d8e1dae5b5b6c3e0d2f229780f75a
 
 
 class TaskDetailView(LoginRequiredMixin, DetailView):

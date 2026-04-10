@@ -51,7 +51,6 @@ class UserDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'users/delete.html'
     success_url = reverse_lazy('users:users')
 
-<<<<<<< HEAD
     def form_valid(self, form):
         if self.request.user != self.object:
             messages.error(
@@ -77,12 +76,3 @@ class UserDeleteView(LoginRequiredMixin, DeleteView):
             'Пользователь успешно удален',
         )
         return super().form_valid(form)
-=======
-    def delete(self, request, *args, **kwargs):
-        if request.user != self.get_object():
-            messages.error(request, 'Вы не можете удалить другого пользователя')
-            return redirect('users:users')
-        
-        messages.success(self.request, 'Пользователь успешно удален')
-        return super(UserDeleteView, self).delete(request, *args, **kwargs)
->>>>>>> b2720a750f8d8e1dae5b5b6c3e0d2f229780f75a

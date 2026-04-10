@@ -19,7 +19,6 @@ class TaskForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-<<<<<<< HEAD
         self.fields['executor'].queryset = (
             User.objects.all()
         )
@@ -30,12 +29,6 @@ class TaskForm(forms.ModelForm):
             )
         )
 
-=======
-        self.fields['executor'].queryset = User.objects.all()
-        self.fields['executor'].label_from_instance = (
-            lambda user: f"{user.first_name} {user.last_name}".strip() or user.username
-        )
->>>>>>> b2720a750f8d8e1dae5b5b6c3e0d2f229780f75a
 
 class TaskFilter(django_filters.FilterSet):
     status = django_filters.ModelChoiceFilter(
