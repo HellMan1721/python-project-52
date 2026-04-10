@@ -23,7 +23,7 @@
     <div class="mb-3">
       <label for="id_username">Имя пользователя</label>
       {{ form.username }}
-      {% for error in form.name.errors %}
+      {% for error in form.username.errors %}
           <div class="text-danger">{{ error }}</div>
       {% endfor %}
     </div>
