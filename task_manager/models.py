@@ -10,10 +10,7 @@ class Status(models.Model):
     name = models.CharField(
         max_length=150,
         unique=True,
-        verbose_name=_('Имя'),
-        error_messages={
-            'unique': _('Статус уже существует')
-        }
+        verbose_name=_('Имя')
         )
 
     class Meta:
