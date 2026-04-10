@@ -18,7 +18,7 @@ class TaskFilterTest(TestCase):
             executor=cls.user
         )
         cls.task.labels.add(cls.label)
-    
+
     def test_filter_status(self):
         """Unit тест фильтра по статусу"""
         data = {'status': self.status.pk}
@@ -26,7 +26,7 @@ class TaskFilterTest(TestCase):
         self.assertTrue(f.is_valid())
         self.assertEqual(f.qs.count(), 1)
         self.assertEqual(f.qs.first(), self.task)
-    
+
     def test_filter_executor(self):
         """Unit тест фильтра по исполнителю"""
         data = {'executor': self.user.pk}

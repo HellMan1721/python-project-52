@@ -7,15 +7,6 @@
 <div class="container">
   <h1>{% trans "Создать пользователя" %}</h1>
 
-  {# Сообщения (важно для тестов) #}
-  {% if messages %}
-    {% for message in messages %}
-      <div role="alert" class="alert alert-{{ message.tags }}">
-        {{ message }}
-      </div>
-    {% endfor %}
-  {% endif %}
-
   <form method="post" novalidate>
     {% csrf_token %}
     

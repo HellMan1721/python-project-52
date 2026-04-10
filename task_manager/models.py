@@ -5,6 +5,7 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
+
 class Status(models.Model):
     name = models.CharField(max_length=150, unique=True, verbose_name=_('Имя'))
 
@@ -18,7 +19,8 @@ class Status(models.Model):
     def clean(self):
         if self.pk is None and Status.objects.filter(name=self.name).exists():
             raise ValidationError({'name': _('уже существует')})
-        
+
+
 class Label(models.Model):
     name = models.CharField(
         verbose_name=_('имя'),
@@ -38,4 +40,3 @@ class Label(models.Model):
 
     def __str__(self):
         return self.name
-        

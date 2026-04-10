@@ -27,6 +27,15 @@
                     <strong>{% trans "Исполнитель" %}:</strong> {{ task.executor.username|default:"—" }}
                 </div>
             </div>
+            
+            {% if task.labels.all %}
+            <div class="mb-4">
+                <strong>{% trans "Метки" %}:</strong>
+                {% for label in task.labels.all %}
+                    <span class="badge bg-secondary">{{ label.name }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
 
             <div class="d-flex gap-2">
                 <a href="{% url 'tasks:update' task.pk %}" class="btn btn-primary">{% trans "Изменить" %}</a>

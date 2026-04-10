@@ -11,7 +11,7 @@ collectstatic:
 	uv run python manage.py collectstatic --no-input
 
 lint:
-	uv run flake8 .
+	uv run flake8 task_manager & uv run flake8 tasks
 
 test:
 	uv run pytest
