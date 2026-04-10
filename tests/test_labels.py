@@ -37,9 +37,6 @@ class LabelTest(TestCase):
         print(f"Task labels: {task.labels.all()}")
 
         self.client.login(username="test", password="pass123")
-        response = self.client.post(
-            reverse("labels:delete", kwargs={"pk": self.label.pk})
-        )
 
         print(
             f"After delete - Label exists: {

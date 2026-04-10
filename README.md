@@ -1,7 +1,43 @@
-### Hexlet tests and linter status:
-[![Actions Status](https://github.com/HellMan1721/python-project-52/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/HellMan1721/python-project-52/actions)
+# Task Manager (Python/Django)
+
+[![SonarCloud Coverage](https://sonarcloud.io/api/project_badges/measure?project=hellman1721_python-project-52&metric=coverage)](https://sonarcloud.io/dashboard?id=hellman1721_python-project-52)
 
 
-**Deploy:** https://your-app.onrender.com
+Веб-приложение для управления задачами с пользователями, статусами, метками и фильтрами.
 
-Django Task Manager на uv + Render.com
+## ✨ Функции
+- Регистрация/авторизация
+- CRUD: Users, Statuses, Labels, Tasks
+- Фильтры задач (author, status, executor, labels)
+- Права доступа (только владелец редактирует)
+- Bootstrap UI
+- Rollbar мониторинг ошибок
+
+## 🛠 Установка
+
+```bash
+git clone https://github.com/твой_username/python-project-52.git
+cd python-project-52
+make install
+# Заполни .env (SECRET_KEY, DATABASE_URL)
+make migrate
+make dev-start
+```
+
+**Доступ**: http://localhost:8000
+
+## 🧪 Тестирование
+
+```bash
+make test  # Unit + E2E Playwright
+coverage report  # Покрытие тестами
+```
+
+## 🚀 Деплой
+
+**Render**:
+
+```bash
+Build: uv sync --frozen && python manage.py collectstatic --noinput
+Start: uv run gunicorn task_manager.wsgi:application
+```

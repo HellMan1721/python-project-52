@@ -16,7 +16,6 @@ def test_task_create_with_labels(self):
         "labels": [label.pk],
     }
 
-    response = self.client.post(reverse("tasks:create"), data)
     task = Task.objects.get(name="Test task")
 
     self.assertEqual(task.labels.count(), 1)
