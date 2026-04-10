@@ -4,13 +4,12 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('task_manager', '0002_task'),
+        ("task_manager", "0002_task"),
     ]
 
     operations = [
         migrations.DeleteModel(
-            name='Task',
+            name="Task",
         ),
     ]

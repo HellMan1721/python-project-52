@@ -6,26 +6,61 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('task_manager', '0001_initial'),
+        ("task_manager", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Task',
+            name="Task",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=150, unique=True, verbose_name='Имя')),
-                ('description', models.TextField(verbose_name='Описание')),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='author_tasks', to=settings.AUTH_USER_MODEL, verbose_name='Автор')),
-                ('executor', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='executor_tasks', to=settings.AUTH_USER_MODEL, verbose_name='Исполнитель')),
-                ('status', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='task_manager.status', verbose_name='Статус')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(max_length=150, unique=True, verbose_name="Имя"),
+                ),
+                ("description", models.TextField(verbose_name="Описание")),
+                (
+                    "author",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="author_tasks",
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="Автор",
+                    ),
+                ),
+                (
+                    "executor",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        related_name="executor_tasks",
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="Исполнитель",
+                    ),
+                ),
+                (
+                    "status",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="task_manager.status",
+                        verbose_name="Статус",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Задача',
-                'verbose_name_plural': 'Задачи',
+                "verbose_name": "Задача",
+                "verbose_name_plural": "Задачи",
             },
         ),
     ]

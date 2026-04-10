@@ -4,23 +4,43 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('task_manager', '0003_delete_task'),
+        ("task_manager", "0003_delete_task"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Label',
+            name="Label",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(help_text='Уникальное название метки', max_length=255, unique=True, verbose_name='имя')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='дата создания')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        help_text="Уникальное название метки",
+                        max_length=255,
+                        unique=True,
+                        verbose_name="имя",
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(
+                        auto_now_add=True, verbose_name="дата создания"
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'метка',
-                'verbose_name_plural': 'метки',
-                'ordering': ['name'],
+                "verbose_name": "метка",
+                "verbose_name_plural": "метки",
+                "ordering": ["name"],
             },
         ),
     ]
