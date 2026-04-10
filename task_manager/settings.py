@@ -13,8 +13,6 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
-import rollbar
-
 
 load_dotenv()
 
@@ -42,38 +40,27 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
-    "rollbar.contrib.django",
-    "whitenoise.runserver_nostatic",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "bootstrap4",
     "task_manager",
     "tasks",
     "django_filters",
 ]
 
-rollbar.init(
-    access_token=os.getenv("ROLLBAR_ACCESS_TOKEN"),
-    environment=os.getenv("ROLLBAR_ENVIRONMENT", "development"),
-    root=str(BASE_DIR),
-    branch="main",
-    handler="synchronous",
-)
 
 MIDDLEWARE = [
-    "rollbar.contrib.django.middleware.RollbarNotifierMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 
@@ -139,10 +126,32 @@ LOCALE_PATHS = [
 
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 LOGIN_URL = "/login/"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
-rollbar.report_message("Rollbar is configured correctly", "info")
+try:
+    import rollbar
+    rollbar.init(
+        access_token=os.getenv("ROLLBAR_ACCESS_TOKEN"),
+        environment=os.getenv("ROLLBAR_ENVIRONMENT", "development"),
+        root=str(BASE_DIR),
+        branch="main",
+        handler="synchronous",
+        )
+except ImportError:
+    rollbar = None
+
+if rollbar:
+    MIDDLEWARE = [
+        'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
+        ...
+    ]
+else:
+    MIDDLEWARE = [
+        ...
+    ]
+
+if rollbar:
+    rollbar.report_message("Rollbar is configured correctly", "info")
