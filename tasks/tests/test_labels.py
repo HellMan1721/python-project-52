@@ -1,5 +1,4 @@
 from django.contrib.auth import get_user_model
-from django.urls import reverse
 
 from task_manager.models import Label, Status
 from tasks.models import Task
@@ -14,15 +13,6 @@ def test_task_create_with_labels(self):  # ❌ НЕ метод класса!
     # Создаем PRECONDITIONS
     status = Status.objects.create(name="New")
     label = Label.objects.create(name="bug")
-    
-    # ✅ Создаем Task ЧЕРЕЗ VIEW (имитация формы)
-    data = {
-        'name': 'Test task',
-        'description': 'Test desc',
-        'status': status.pk,
-        'executor': self.user.pk,  # self.user из setUpTestData!
-        'labels': [label.pk]  # ✅ M2M labels!
-    }
     
     task = Task.objects.get(name="Test task")
     
