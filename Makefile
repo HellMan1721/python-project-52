@@ -11,7 +11,7 @@ collectstatic:
 	uv run python manage.py collectstatic --no-input
 
 lint:
-	ruff check
+	uv run ruff check
 
 test:
 	uv run manage.py test
