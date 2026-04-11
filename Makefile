@@ -17,7 +17,7 @@ test:
 	uv run manage.py test
 
 test-coverage:
-	uv run coverage run manage.py test
+	uv run coverage run --source=task_manager,tasks manage.py test
 	uv run coverage xml
 	uv run coverage report -m
 
