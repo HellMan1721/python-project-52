@@ -23,7 +23,18 @@ dependencies = [
 
 [tool.coverage.run]
 source = ["task_manager", "tasks"]
-omit = ["*/tests/*", "*/migrations/*"]
+omit = [
+    "*/migrations/*",
+    "*/tests/*",
+    "*/__init__.py",
+    "manage.py",
+    "*/admin.py",
+    "*/wsgi.py",
+    "*/asgi.py",
+    "*/settings.py/*",
+    "*/urls.py"
+
+]
 
 [tool.coverage.report]
 exclude_lines = [
