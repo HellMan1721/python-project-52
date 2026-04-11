@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from django.test import Client, TestCase
+from django.test import TestCase
 from django.urls import reverse
 
 from task_manager.models import Label, Status
@@ -30,7 +30,12 @@ class LabelTest(TestCase):
         self.client.login(username="test", password="pass123")
         
         # ✅ ПОПЫТКА удаления через VIEW
-        response = self.client.post(reverse("labels:delete", kwargs={"pk": self.label.pk}))
+        response = self.client.post(
+            reverse(
+                "labels:delete",
+                kwargs={"pk": self.label.pk}
+                )
+            )
         
         # ✅ Label НЕ удален!
         self.assertTrue(Label.objects.filter(name="bug").exists())

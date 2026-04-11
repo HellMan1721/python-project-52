@@ -1,6 +1,7 @@
 from django.urls import reverse, resolve
 from django.test import TestCase
 
+
 class TestTaskURLs(TestCase):
     def test_urls_resolve(self):
         """✅ 100% coverage всех urls.py"""

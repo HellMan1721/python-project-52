@@ -13,7 +13,10 @@ class StatusTestCase(TestCase):
 
     def test_status_create(self):
         self.client.login(username="test", password="test")
-        response = self.client.post(reverse("statuses:create"), {"name": "Новый"})
+        response = self.client.post(
+            reverse("statuses:create"),
+            {"name": "Новый"}
+            )
         self.assertRedirects(response, reverse("statuses:statuses"))
         self.assertEqual(Status.objects.count(), 2)  # + новый статус
 

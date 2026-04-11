@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 
+
 class TestAllURLs(TestCase):
     def test_label_urls(self):
         """100% coverage labels/urls.py"""

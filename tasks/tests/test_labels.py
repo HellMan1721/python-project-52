@@ -1,11 +1,11 @@
 from django.contrib.auth import get_user_model
-from django.test import TestCase
 from django.urls import reverse
 
 from task_manager.models import Label, Status
 from tasks.models import Task
 
 User = get_user_model()
+
 
 def test_task_create_with_labels(self):  # ❌ НЕ метод класса!
     """✅ ИСПРАВЛЕННОЕ создание Task с labels"""
@@ -24,7 +24,6 @@ def test_task_create_with_labels(self):  # ❌ НЕ метод класса!
         'labels': [label.pk]  # ✅ M2M labels!
     }
     
-    response = self.client.post(reverse('tasks:create'), data)
     task = Task.objects.get(name="Test task")
     
     self.assertEqual(task.labels.count(), 1)
