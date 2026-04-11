@@ -10,8 +10,6 @@ def test_task_create_with_labels(self):  # ❌ НЕ метод класса!
     """✅ ИСПРАВЛЕННОЕ создание Task с labels"""
     self.client.login(username="test", password="pass123")
     
-    # Создаем PRECONDITIONS
-    status = Status.objects.create(name="New")
     label = Label.objects.create(name="bug")
     
     task = Task.objects.get(name="Test task")
