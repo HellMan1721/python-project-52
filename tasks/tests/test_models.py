@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
+from django.db import IntegrityError
 
 from tasks.models import Status, Task
 
@@ -28,3 +29,12 @@ class TaskModelTest(TestCase):
 
     def test_task_verbose_name_plural(self):
         self.assertEqual(Task._meta.verbose_name_plural, "Задачи")
+    
+    def test_task_constraints(self):
+        with self.assertRaises(IntegrityError):
+            Task.objects.create(name="")
+            
+    def test_models_meta(self):
+        """Полное покрытие _meta"""
+        self.assertEqual(Task._meta.verbose_name, "Задача")
+        self.assertEqual(Status._meta.verbose_name_plural, "Статусы")

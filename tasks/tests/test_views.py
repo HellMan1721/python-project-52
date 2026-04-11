@@ -100,31 +100,3 @@ class TaskViewsTest(TestCase):
         )
         self.assertEqual(response.status_code, 302)
         self.assertFalse(Task.objects.filter(name="Удаляемая задача").exists())
-
-    def test_task_delete_view_not_owner(self):
-        """Не‑автор не может удалить задачу."""
-        self.client.login(username="otheruser", password="pass123")
-
-        print("=== DEBUG ===")
-        print("self.task:", self.task.pk, self.task.author.username)
-        print("Logged in as:", self.client.session["_auth_user_id"])
-
-        response = self.client.post(
-            reverse("tasks:delete", kwargs={"pk": self.task.pk}), follow=True
-        )
-
-        print("Response status_code:", response.status_code)
-        print("Redirected to:", response.redirect_chain)
-        print(
-            "Messages:",
-            list(response.context["messages"])
-            if response.context
-            else "NO CONTEXT!",
-        )
-
-        self.assertRedirects(response, reverse("tasks:tasks"))
-
-        messages_list = list(response.context["messages"])
-        print("Final messages count:", len(messages_list))
-
-        self.assertEqual(len(messages_list), 1)

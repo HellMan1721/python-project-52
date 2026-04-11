@@ -34,4 +34,4 @@ jobs:
             -Dsonar.organization=hellman1721
             -Dsonar.python.coverage.reportPaths=coverage.xml
             -Dsonar.exclusions=**/migrations/**,**/tests/**,**/__init__.py,manage.py,**/admin.py,**/wsgi.py,**/asgi.py,**/settings.py
-            -Dsonar.coverage.exclusions=**/migrations/**,**/tests/**,**/__init__.py,manage.py,**/admin.py,**/wsgi.py,**/asgi.py,**/settings.py,task_manager/urls.py,task_manager/views.py
+            -Dsonar.coverage.exclusions=**/migrations/**,**/tests/**,**/__init__.py,manage.py,**/admin.py,**/wsgi.py,**/asgi.py,**/settings.py

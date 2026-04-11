@@ -6,10 +6,16 @@ from task_manager.models import Status
 
 
 class StatusTestCase(TestCase):
-    def setUp(self):
-        self.user = User.objects.create_user(username="test", password="test")
+    @classmethod  
+    def setUpTestData(cls):  # ✅ Classmethod!
+        cls.user = User.objects.create_user(username="test", password="test")
+        cls.status = Status.objects.create(name="Test")  # ✅ Coverage!
 
     def test_status_create(self):
         self.client.login(username="test", password="test")
-        self.client.post(reverse("statuses:create"), {"name": "Новый"})
-        self.assertEqual(Status.objects.count(), 1)
+        response = self.client.post(reverse("statuses:create"), {"name": "Новый"})
+        self.assertRedirects(response, reverse("statuses:statuses"))
+        self.assertEqual(Status.objects.count(), 2)  # + новый статус
+
+    def test_status_str(self):  # ✅ +Coverage
+        self.assertEqual(str(self.status), "Test")
