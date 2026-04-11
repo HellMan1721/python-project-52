@@ -14,7 +14,10 @@ lint:
 	ruff check
 
 test:
-	uv run pytest
+	uv run manage.py test
+
+test-coverage:
+	coverage run manage.py test
 
 build:
 	./build.sh
