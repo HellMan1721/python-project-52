@@ -10,7 +10,7 @@ migrate:
 collectstatic:
 	uv run python manage.py collectstatic --no-input
 
-lint:
+check:
 	uv run ruff check
 
 test:
@@ -20,9 +20,6 @@ test-coverage:
 	coverage run manage.py test
 	coverage xml
 	coverage report -m
-
-check:
-	ruff check
 
 build:
 	./build.sh
