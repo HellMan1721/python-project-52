@@ -21,6 +21,9 @@ test-coverage:
 	coverage xml
 	coverage report -m
 
+check:
+	ruff check
+
 build:
 	./build.sh
 
