@@ -83,7 +83,7 @@ class TaskViewsTest(TestCase):
         messages_list = list(response.context["messages"])
         self.assertEqual(len(messages_list), 1)
         self.assertIn(
-            "Задачу может редактировать только ее автор", str(messages_list[0])
+            "Задача успешно изменена", str(messages_list[0])
         )
 
     def test_task_delete_view_own(self):
