@@ -33,5 +33,19 @@ jobs:
             -Dsonar.projectKey=HellMan1721_python-project-52
             -Dsonar.organization=hellman1721
             -Dsonar.python.coverage.reportPaths=coverage.xml
-            -Dsonar.coverage.exclusions=*/migrations/*, */tests/*, */__init__.py, manage.py, */admin.py, */wsgi.py, */asgi.py, */settings.py/*, */urls.py
-            -Dsonar.exclusions=*/migrations/*, */tests/*, */__init__.py, manage.py, */admin.py, */wsgi.py, */asgi.py, */settings.py/*, */urls.py
+            -Dsonar.exclusions=
+              **/migrations/**,
+              **/tests/**,
+              **/__init__.py,
+              manage.py,
+              **/admin.py,
+              **/wsgi.py,
+              **/asgi.py,
+              **/settings/**,
+              **/urls.py
+            -Dsonar.coverage.exclusions=
+              **/migrations/**,
+              **/tests/**,
+              **/__init__.py,
+              manage.py,
+              **/admin.py
