@@ -17,9 +17,9 @@ test:
 	uv run manage.py test
 
 test-coverage:
-	coverage run manage.py test
-	coverage xml
-	coverage report -m
+	uv run coverage run manage.py test
+	uv run coverage xml
+	uv run coverage report -m
 
 build:
 	./build.sh
