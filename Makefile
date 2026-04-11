@@ -18,7 +18,7 @@ test:
 
 test-coverage:
 	uv run coverage run --source=task_manager,tasks manage.py test
-	uv run coverage xml --include="task_manager/*" --include="tasks/*"
+	uv run coverage xml
 	uv run coverage report -m
 
 build:
