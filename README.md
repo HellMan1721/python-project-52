@@ -2,6 +2,7 @@
 
 [![SonarCloud Coverage](https://sonarcloud.io/api/project_badges/measure?project=HellMan1721_python-project-52&metric=coverage)](https://sonarcloud.io/dashboard?id=HellMan1721_python-project-52)
 
+[![Actions Status](https://github.com/HellMan1721/python-project-52/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/HellMan1721/python-project-52/actions)
 
 Веб-приложение для управления задачами с пользователями, статусами, метками и фильтрами.
 
