@@ -30,8 +30,8 @@ make dev-start
 ## 🧪 Тестирование
 
 ```bash
-make test  # Unit + E2E Playwright
-coverage report  # Покрытие тестами
+make test  # Тесты
+make test-coverage  # Покрытие тестами
 ```
 
 ## 🚀 Деплой
@@ -39,6 +39,6 @@ coverage report  # Покрытие тестами
 **Render**:
 
 ```bash
-Build: uv sync --frozen && python manage.py collectstatic --noinput
+Build: make install && make collectstatic
 Start: uv run gunicorn task_manager.wsgi:application
 ```
